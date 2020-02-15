@@ -19,6 +19,7 @@ import com.airport.mgmt.form.Plane;
 import com.airport.mgmt.service.PlaneService;
 
 @Controller
+@RequestMapping("/plane")
 public class PlaneController {
 
 	private static Logger log=Logger.getLogger(PlaneController.class);
@@ -30,7 +31,7 @@ public class PlaneController {
 		this.planeService = planeService;
 	}
 
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/")
 	public String listPlane(Map<String,Object> map)
 	{
 		map.put("plane", new Plane());
@@ -39,7 +40,7 @@ public class PlaneController {
 		return "plane";
 	}
 	
-	@RequestMapping(value="/plane/add",method=RequestMethod.POST)
+	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public String addPlane(@ModelAttribute("plane")@Validated Plane plane,BindingResult bindingResult,Model model)
 	{
 		if(bindingResult.hasErrors())
@@ -64,7 +65,7 @@ public class PlaneController {
 				log.info("Before update plane");
 				planeService.updatePlane(plane);
 			}
-			return "redirect:/index";
+			return "redirect:/plane/";
 		}
 	}
 	
@@ -85,6 +86,6 @@ public class PlaneController {
 	{
 		planeService.deletePlane(planeId);
 		log.info("Deleting plane information"+planeId);
-		return "redirect:/index";
+		return "redirect:/plane/";
 	}
 }

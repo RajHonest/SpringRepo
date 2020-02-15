@@ -55,8 +55,14 @@
 	<beans:bean id="planeService" class="com.airport.mgmt.service.PlaneServiceImpl">
 		<beans:property name="planeDao" ref="planeDao"/>
 	</beans:bean>
-	
 	<beans:bean id="planeDao" class="com.airport.mgmt.dao.PlaneDaoImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="userService" class="com.airport.mgmt.service.UserServiceImpl">
+		<beans:property name="userDao" ref="userDao"/>
+	</beans:bean>
+	<beans:bean id="userDao" class="com.airport.mgmt.dao.UserDaoImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></beans:property>
 	</beans:bean>
 	

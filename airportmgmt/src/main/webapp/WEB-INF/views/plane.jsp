@@ -46,7 +46,7 @@
 	{
 		if(confirm('Do you want to delete this plane ?'))
 		{
-			var url='delete/'+planeId;
+			var url='/plane/delete/'+planeId;
 			window.location.href=url;
 		}
 	}
