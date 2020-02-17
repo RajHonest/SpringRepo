@@ -19,7 +19,7 @@ import com.airport.mgmt.form.Plane;
 import com.airport.mgmt.service.PlaneService;
 
 @Controller
-@RequestMapping("/plane")
+@RequestMapping("/api/plane")
 public class PlaneController {
 
 	private static Logger log=Logger.getLogger(PlaneController.class);
@@ -82,10 +82,10 @@ public class PlaneController {
 	}
 	
 	@RequestMapping("/delete/{planeId}")
-	public String deletePlane(@PathVariable("planeId")Integer planeId)
+	public String deletePlane(@PathVariable("planeId")Integer planeId, Map<String,Object>map)
 	{
-		planeService.deletePlane(planeId);
 		log.info("Deleting plane information"+planeId);
+		planeService.deletePlane(planeId);
 		return "redirect:/plane/";
 	}
 }

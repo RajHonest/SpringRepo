@@ -13,6 +13,7 @@ import com.airport.mgmt.form.Plane;
 public class PlaneServiceImpl implements PlaneService {
 
 	private static Logger log=Logger.getLogger(PlaneServiceImpl.class);
+	
 	private PlaneDao planeDao;
 	public void setPlaneDao(PlaneDao planeDao) {
 		this.planeDao = planeDao;

@@ -9,10 +9,11 @@
               http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
               http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
               http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-              
+         
+    <mvc:annotation-driven/>     
 	<context:component-scan base-package="com.airport.mgmt"/>
 	
-	<mvc:annotation-driven/>
+	
 	
 	<mvc:resources location="/images/" mapping="/images/**"/>
 	
@@ -40,7 +41,9 @@
 		<beans:property name="dataSource" ref="dataSource"/>
 		<beans:property name="annotatedClasses">
 			<beans:list>
+				<beans:value>com.airport.mgmt.form.User</beans:value>
 				<beans:value>com.airport.mgmt.form.Plane</beans:value>
+				<beans:value>com.airport.mgmt.form.Pilot</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -52,19 +55,27 @@
 		</beans:property>
 	</beans:bean>
 	
-	<beans:bean id="planeService" class="com.airport.mgmt.service.PlaneServiceImpl">
-		<beans:property name="planeDao" ref="planeDao"/>
-	</beans:bean>
 	<beans:bean id="planeDao" class="com.airport.mgmt.dao.PlaneDaoImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></beans:property>
 	</beans:bean>
-	
-	<beans:bean id="userService" class="com.airport.mgmt.service.UserServiceImpl">
-		<beans:property name="userDao" ref="userDao"/>
+	<beans:bean id="planeService" class="com.airport.mgmt.service.PlaneServiceImpl">
+		<beans:property name="planeDao" ref="planeDao"/>
 	</beans:bean>
+	
+	<beans:bean id="pilotDao" class="com.airport.mgmt.dao.PilotDaoImpl">
+		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></beans:property>
+	</beans:bean>
+	<beans:bean id="pilotService" class="com.airport.mgmt.service.PilotServiceImpl">
+		<beans:property name="pilotDao" ref="pilotDao"/>
+	</beans:bean>
+	
 	<beans:bean id="userDao" class="com.airport.mgmt.dao.UserDaoImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"></beans:property>
 	</beans:bean>
+	<beans:bean id="userService" class="com.airport.mgmt.service.UserServiceImpl">
+		<beans:property name="userDao" ref="userDao"/>
+	</beans:bean>
+	
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	

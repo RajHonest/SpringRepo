@@ -3,11 +3,13 @@ package com.airport.mgmt.service;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.airport.mgmt.dao.UserDao;
 import com.airport.mgmt.form.User;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	private static Logger log=Logger.getLogger(UserServiceImpl.class);

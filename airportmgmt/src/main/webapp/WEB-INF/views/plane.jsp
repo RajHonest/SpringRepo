@@ -133,16 +133,16 @@
 		<tr>
 			<td colspan="2">
 				<c:if test="${!empty plane.ownerFirstName}">
-					<input type="submit" value="<spring:message code="label.editplane"/>"/>
+					<input type="submit" value="<spring:message code="label.update"/>"/>
 				</c:if>
 				<c:if test="${empty plane.ownerFirstName}">
-					<input type="submit" value="<spring:message code="label.addplane"/>"/>
+					<input type="submit" value="<spring:message code="label.add"/>"/>
 				</c:if>
 			</td>
 		</tr>
 	</table>
 </form:form>
-<h3>List of Customer</h3>
+<h3>List of Plane's</h3>
 <c:if test="${!empty planeList}">
 	<table class="customerTable">
 		<tr>
@@ -155,14 +155,14 @@
 		</tr>
 		<c:forEach items="${planeList}" var="plane">
 			<tr>
-				<td><a href="<c:url value='/edit/${plane.id}'/>">${plane.ownerFirstName}</a></td>
+				<td><a href="<c:url value='/plane/edit/${plane.id}'/>">${plane.ownerFirstName}</a></td>
 				<td>${plane.ownerLastName}</td>
 				<td>${plane.ownerContactNumber}</td>
 				<td>${plane.ownerEmail}</td>
 				<td>${plane.planeType}</td>
 				<td>${plane.planeCapacity}</td>
 				<td><img src="<c:url value='/images/vcard_delete.png'/>" title="Delete Plane" onclick="javascript:deletePlane(${plane.id})"/>
-					<a href="<c:url value='/edit/${plane.id}'/>"><img src="<c:url value='/images/vcard_edit.png'/>" title="Edit Plane"/></a>
+					<a href="<c:url value='/plane/edit/${plane.id}'/>"><img src="<c:url value='/images/vcard_edit.png'/>" title="Edit Plane"/></a>
 				</td>
 			</tr> 
 		</c:forEach>
