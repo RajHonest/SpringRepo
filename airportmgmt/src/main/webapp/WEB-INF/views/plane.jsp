@@ -7,55 +7,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-<style type="text/css">
-              body {
-                     font-family: verdana;
-                     font-size: 12px;
-                     margin: 40px;
-              }
-              .customerTable, .customerTable td {
-                     border-collapse: collapse;
-                     border: 1px solid #aaa;
-                     margin: 2px;
-                     padding: 2px 2px 2px 10px;
-                     font-size: 12px;
-              }
-              .CustomerTable th {
-                     font-weight: bold;
-                     font-size: 12px;
-                     background-color: #5C82FF;
-                     color: white;
-              }
-              .CustomerLabel {
-                     font-family: verdana;
-                     font-size: 12px;
-                     font-weight: bold;
-              }
-              a, a:AFTER {
-                     color: blue;
-              }
-              
-  			.error {
-      			color: red;
-      			font-style: italic;
-  			}
-</style>
+<title><spring:message code="label.app.title"/></title>
 <script type="text/javascript">
 	function deletePlane(planeId)
 	{
 		if(confirm('Do you want to delete this plane ?'))
 		{
-			var url='/plane/delete/'+planeId;
+			var url='/api/plane/delete/'+planeId;
 			window.location.href=url;
 		}
 	}
 </script>
 </head>
 <body>
-<h2>Add/Edit Plane</h2>
-<c:url var="action" value="/plane/add.html"></c:url>
-<form:form method="post" action="${action}" commandName="plane" cssClass="customerForm">
+<%@ include file="/pages/header.html" %>
+<div class="main">
+
+<div class="headTitle"><span>Add/Edit Plane</span></div>
+<c:url var="action" value="/api/plane/add"></c:url>
+<form:form method="post" action="${action}" commandName="plane" cssClass="airportForm">
 	<table>
 		<c:if test="${!empty plane}">
 			<tr>
@@ -133,7 +103,7 @@
 		<tr>
 			<td colspan="2">
 				<c:if test="${!empty plane.ownerFirstName}">
-					<input type="submit" value="<spring:message code="label.update"/>"/>
+					<input class="myButton" type="submit" value="<spring:message code="label.update"/>"/>
 				</c:if>
 				<c:if test="${empty plane.ownerFirstName}">
 					<input type="submit" value="<spring:message code="label.add"/>"/>
@@ -142,31 +112,36 @@
 		</tr>
 	</table>
 </form:form>
-<h3>List of Plane's</h3>
+<div class="spaceDivider"></div>
+<div class="headTitle"><span>List of Plane's</span></div>
 <c:if test="${!empty planeList}">
-	<table class="customerTable">
+	<table class="airportTable">
 		<tr>
 			<th width="180">First Name</th>
-			<th width="160">Last Name</th>
+			<th width="150">Last Name</th>
 			<th width="60">Contact No</th>
 			<th width="80">Email</th>
 			<th width="60">Type</th>
 			<th width="60">Capacity</th>
+			<th width="20">&nbsp;</th>
 		</tr>
 		<c:forEach items="${planeList}" var="plane">
 			<tr>
-				<td><a href="<c:url value='/plane/edit/${plane.id}'/>">${plane.ownerFirstName}</a></td>
+				<td><a href="<c:url value='/api/plane/edit/${plane.id}'/>">${plane.ownerFirstName}</a></td>
 				<td>${plane.ownerLastName}</td>
 				<td>${plane.ownerContactNumber}</td>
 				<td>${plane.ownerEmail}</td>
 				<td>${plane.planeType}</td>
 				<td>${plane.planeCapacity}</td>
-				<td><img src="<c:url value='/images/vcard_delete.png'/>" title="Delete Plane" onclick="javascript:deletePlane(${plane.id})"/>
-					<a href="<c:url value='/plane/edit/${plane.id}'/>"><img src="<c:url value='/images/vcard_edit.png'/>" title="Edit Plane"/></a>
+				<td>
+				<!-- <img src="<c:url value='/images/vcard_delete.png'/>" title="Delete Plane" onclick="javascript:deletePlane(${plane.id})"/> -->
+				<a href="<c:url value='/api/plane/delete/${plane.id}'/>"><img src="<c:url value='/images/vcard_delete.png'/>" title="Delete Plane"/></a>
+					<a href="<c:url value='/api/plane/edit/${plane.id}'/>"><img src="<c:url value='/images/vcard_edit.png'/>" title="Edit Plane"/></a>
 				</td>
 			</tr> 
 		</c:forEach>
 	</table>
 </c:if>
+</div>
 </body>
 </html>

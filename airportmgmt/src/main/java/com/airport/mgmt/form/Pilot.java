@@ -49,14 +49,13 @@ public class Pilot {
 	@Size(min=2,max=30)
 	private String state;
 	
+	@NotEmpty
 	@Column(name="ZIPCODE")
-	@NotNull @Min(0) @Max(10)
 	private String zipCode;
-	
 
-	@Column(name="SSN")
+	/*@Column(name="SSN")
 	@NotNull @Min(0) @Max(100)
-	private Integer ssn;
+	private Integer ssn; */
 
 	public Integer getPilotId() {
 		return pilotId;
@@ -122,13 +121,13 @@ public class Pilot {
 		this.zipCode = zipCode;
 	}
 
-	public Integer getSsn() {
+	/*public Integer getSsn() {
 		return ssn;
 	}
 
 	public void setSsn(Integer ssn) {
 		this.ssn = ssn;
-	}
+	}*/
 	
 	
 	

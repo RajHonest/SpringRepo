@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airport.mgmt.form.Pilot;
 import com.airport.mgmt.service.PilotService;
@@ -66,7 +67,7 @@ public class PilotController {
 				log.info("Before update pilot");
 				pilotService.updatePilot(pilot);
 			}
-			return "redirect:/pilot/";
+			return "redirect:/api/pilot/";
 		}
 	}
 	
@@ -83,11 +84,12 @@ public class PilotController {
 	}
 	
 	@RequestMapping("/delete/{pilotId}")
-	public String deletePilot(@PathVariable("pilotId")Integer pilotId)
+	public String deletePilot(@PathVariable("pilotId")Integer pilotId, Map<String,Object>map, RedirectAttributes redirectAttrs)
 	{
 		log.info("Deleting pilot information:"+pilotId);
 		pilotService.deletePilot(pilotId);
-		
-		return "redirect:/pilot/";
+		map.put("message", "Pilot details deleted successfully");
+		redirectAttrs.addFlashAttribute("message", "Pilot details deleted successfully");
+		return "redirect:/result";
 	}
 }

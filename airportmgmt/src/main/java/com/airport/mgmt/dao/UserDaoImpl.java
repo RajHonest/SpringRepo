@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.airport.mgmt.form.User;
 
@@ -12,6 +14,10 @@ public class UserDaoImpl implements UserDao {
 
 	private static Logger log=Logger.getLogger(UserDaoImpl.class);
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+    private BCryptPasswordEncoder bCryptEncoder;
+	
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -20,6 +26,7 @@ public class UserDaoImpl implements UserDao {
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
 		log.info("Inside dao's addUser");
+		//user.setPassword(bCryptEncoder.encode(user.getPassword()));
 		sessionFactory.getCurrentSession().save(user);
 	}
 

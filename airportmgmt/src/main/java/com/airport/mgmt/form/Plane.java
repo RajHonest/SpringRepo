@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -34,8 +35,8 @@ public class Plane {
 	
 	
 	@Column(name="OWNER_CONTACT_NUMBER")
-	//@NotNull @Min(10) @Max(10)
-	private Integer ownerContactNumber;
+	@Pattern(regexp="(^$|[0-9]{10})")
+	private String ownerContactNumber;
 	
 	@NotEmpty
 	@Column(name="OWNER_EMAIL")
@@ -55,7 +56,7 @@ public class Plane {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Plane(Integer id, Integer ownerId, String ownerFirstName, String ownerLastName, Integer ownerContactNumber, String ownerEmail,
+	public Plane(Integer id, Integer ownerId, String ownerFirstName, String ownerLastName, String ownerContactNumber, String ownerEmail,
 			String planeType, Integer planeCapacity) {
 		super();
 		this.id = id;
@@ -92,10 +93,10 @@ public class Plane {
 	public void setOwnerLastName(String ownerLastName) {
 		this.ownerLastName = ownerLastName;
 	}
-	public Integer getOwnerContactNumber() {
+	public String getOwnerContactNumber() {
 		return ownerContactNumber;
 	}
-	public void setOwnerContactNumber(Integer ownerContactNumber) {
+	public void setOwnerContactNumber(String ownerContactNumber) {
 		this.ownerContactNumber = ownerContactNumber;
 	}
 	public String getOwnerEmail() {

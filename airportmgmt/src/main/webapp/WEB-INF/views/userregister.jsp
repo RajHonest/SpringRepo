@@ -53,9 +53,12 @@
 </script>
 </head>
 <body>
-<h2>Add/Edit Plane</h2>
+<%@ include file="/pages/header.html" %>
+<div class="main">
+
+<div class="headTitle"><span>Add/Edit Plane</span></div>
 <c:url var="action" value="/api/user/add"></c:url>
-<form:form method="post" action="${action}" commandName="user" cssClass="customerForm">
+<form:form method="post" action="${action}" commandName="user" cssClass="airportForm">
 	<table>
 		<c:if test="${!empty user}">
 			<tr>
@@ -87,7 +90,7 @@
 				</form:label>
 			</td>
 			<td>
-				<form:input path="password"/><form:errors path="password" cssClass="error"></form:errors>
+				<form:password path="password"/><form:errors path="password" cssClass="error"></form:errors>
 			</td>
 		</tr>
 		<tr>
@@ -193,6 +196,6 @@
 		</tr>
 	</table>
 </form:form>
-
+</div>
 </body>
 </html>

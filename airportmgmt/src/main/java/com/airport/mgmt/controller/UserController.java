@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airport.mgmt.form.User;
 import com.airport.mgmt.service.UserService;
@@ -58,10 +59,14 @@ public class UserController {
 		{
 			log.info("Validation error");
 			model.addAttribute("userList", userService.listUser());
-			return "user";
+			return "userregister";
 		}
 		else
 		{
+			if(userService.getUserByName(user.getUserName()) != null) {
+				model.addAttribute("errorMessage", "Username already exists !!!");
+				return "redirect:/api/user/"; 
+			}
 			log.info("going to add user");
 			if(null==user.getId())
 			{
@@ -76,7 +81,7 @@ public class UserController {
 				log.info("Before update user");
 				userService.updateUser(user);
 			}
-			return "redirect:/user/";
+			return "redirect:/api/user/";
 		}
 	}
 	
@@ -93,10 +98,13 @@ public class UserController {
 	}
 	
 	@RequestMapping("/delete/{userId}")
-	public String deleteUser(@PathVariable("userId")Integer userId, Map<String,Object>map)
+	public String deleteUser(@PathVariable("userId")Integer userId, Map<String,Object>map, RedirectAttributes redirectAttrs)
 	{
 		log.info("Deleting user information"+userId);
 		userService.deleteUser(userId);
-		return "redirect:/user/";
+		//return "redirect:/api/user/";
+		map.put("message", "User details deleted successfully");
+		redirectAttrs.addFlashAttribute("message", "User details deleted successfully");
+		return "redirect:/result";
 	}
 }

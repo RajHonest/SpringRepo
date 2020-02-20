@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.airport.mgmt.form.Plane;
 import com.airport.mgmt.service.PlaneService;
@@ -65,7 +66,7 @@ public class PlaneController {
 				log.info("Before update plane");
 				planeService.updatePlane(plane);
 			}
-			return "redirect:/plane/";
+			return "redirect:/api/plane/";
 		}
 	}
 	
@@ -82,10 +83,12 @@ public class PlaneController {
 	}
 	
 	@RequestMapping("/delete/{planeId}")
-	public String deletePlane(@PathVariable("planeId")Integer planeId, Map<String,Object>map)
+	public String deletePlane(@PathVariable("planeId")Integer planeId, Map<String,Object>map, RedirectAttributes redirectAttrs)
 	{
 		log.info("Deleting plane information"+planeId);
 		planeService.deletePlane(planeId);
-		return "redirect:/plane/";
+		map.put("message", "Plane details deleted successfully");
+		redirectAttrs.addFlashAttribute("message", "Plane details deleted successfully");
+		return "redirect:/result";
 	}
 }

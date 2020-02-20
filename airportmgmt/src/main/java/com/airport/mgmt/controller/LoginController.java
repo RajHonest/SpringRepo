@@ -63,4 +63,11 @@ public class LoginController {
 		return "index";
 	}
 	
+	@RequestMapping(value="/result")
+	public String resultPage(Map<String,Object> map)
+	{
+		
+		log.info("Inside success:"+map);
+		return "result";
+	}
 }

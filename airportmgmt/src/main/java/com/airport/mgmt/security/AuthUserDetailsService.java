@@ -14,15 +14,20 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.airport.mgmt.controller.UserController;
+import com.airport.mgmt.dao.PlaneDao;
 import com.airport.mgmt.form.User;
 import com.airport.mgmt.service.UserService;
 
 public class AuthUserDetailsService implements UserDetailsService{
 	
-    @Autowired
+    //@Autowired
     private UserService userService;
 
     private static Logger log = Logger.getLogger(AuthUserDetailsService.class);
+    
+    public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
     
     @Override
     @Transactional(readOnly = true)

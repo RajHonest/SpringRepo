@@ -18,6 +18,7 @@
 	<mvc:resources location="/images/" mapping="/images/**"/>
 	
 	<resources mapping="/resources/**" location="/resources/"/>
+	<mvc:resources location="/resources/" mapping="/resources/**"/>
 	
 	<beans:bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" p:location="/WEB-INF/jdbc.properties"/>
 	
@@ -76,7 +77,15 @@
 		<beans:property name="userDao" ref="userDao"/>
 	</beans:bean>
 	
+	<beans:bean id="authUserDetailsService" class="com.airport.mgmt.security.AuthUserDetailsService">
+		<beans:property name="userService" ref="userService"/>
+	</beans:bean>
 	
+	<beans:bean id="bCryptEncoder"
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+    
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

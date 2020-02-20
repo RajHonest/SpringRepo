@@ -7,6 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -50,13 +51,13 @@ public class User {
 	@Column(name="DOB")
 	private String dateOfBirth;
 	
-	@NotNull @Min(0) @Max(100)
+	@Pattern(regexp="(^$|[0-9]{10})")
 	@Column(name="CONTACT_NO")
-	private Integer contactNo;
+	private String contactNo;
 	
-	@NotNull @Min(0) @Max(100)
+	@Pattern(regexp="(^$|[0-9]{10})")
 	@Column(name="ALT_CONTACT_NO")
-	private Integer altContactNo;
+	private String altContactNo;
 	
 	@NotEmpty
 	@Column(name="EMAIL")
@@ -134,19 +135,19 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public Integer getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(Integer contactNo) {
+	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
 
-	public Integer getAltContactNo() {
+	public String getAltContactNo() {
 		return altContactNo;
 	}
 
-	public void setAltContactNo(Integer altContactNo) {
+	public void setAltContactNo(String altContactNo) {
 		this.altContactNo = altContactNo;
 	}
 
